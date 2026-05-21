@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+  File: admin.html
+  Author: Aaron Taula - 15905800
+  Description: CabsOnline admin page. Shows current bookings and past rides,
+               and lets staff assign a taxi to a booking request.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CabsOnline - Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h1 { color: #333; }
+    h2 { color: #333; margin-top: 40px; border-bottom: 2px solid #f5c842; padding-bottom: 6px; }
+    label { font-weight: bold; }
+    input[type="text"] {
+      padding: 8px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="button"] {
+      padding: 8px 20px;
+      background-color: #f5c842;
+      border: none;
+      border-radius: 4px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    input[type="button"]:hover { background-color: #e0b530; }
+    .error { color: red; font-size: 13px; display: block; margin-top: 4px; }
+    #assignMessage { margin-top: 16px; color: green; font-weight: bold; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    th {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      text-align: left;
+    }
+    td { padding: 9px 10px; border-bottom: 1px solid #ddd; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+    button {
+      padding: 5px 14px;
+      background-color: #f5c842;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:disabled { background-color: #aaa; cursor: not-allowed; }
+    .status-assigned { color: green; font-weight: bold; }
+    .status-unassigned { color: orange; font-weight: bold; }
+    .loading { color: #888; font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <h1>CabsOnline - Admin</h1>
+  <p><a href="booking.html">Go to Booking page</a></p>
+
+  <!-- Search section -->
+  <div>
+    <label>Search by Booking Reference:</label><br><br>
+    <input type="text" name="bsearch" id="bsearch" placeholder="e.g. BRN00001 (or leave blank)">
+    <input type="button" name="sbutton" id="sbutton" value="Search Bookings" onclick="searchBookings()">
+    <span class="error" id="err-bsearch"></span>
+  </div>
+
+  <!-- Assignment confirmation message -->
+  <div id="assignMessage"></div>
+
+  <!-- Search results -->
+  <div class="content" id="resultsContainer"></div>
+
+  <!-- Current bookings section -->
+  <h2>Current Bookings</h2>
+  <p>All unassigned bookings from now onwards.</p>
+  <div id="currentBookings"><p class="loading">Loading...</p></div>
+
+  <!-- Past rides section -->
+  <h2>Past Rides</h2>
+  <p>All bookings with a pickup time that has already passed.</p>
+  <div id="pastRides"><p class="loading">Loading...</p></div>
+
+  <script src="admin.js"></script>
+  <script>
+    // Load both sections automatically when the page opens
+    window.onload = function() {
+      loadCurrentBookings();
+      loadPastRides();
+    };
+  </script>
+
+</body>
+</html>

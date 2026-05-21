@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+  File: booking.html
+  Author: Aaron Taula - 15905800
+  Description: CabsOnline booking page. Lets a passenger fill in their
+               details and submit a taxi booking request.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CabsOnline - Book a Taxi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h1 { color: #333; }
+    label { display: block; margin-top: 12px; font-weight: bold; }
+    input[type="text"], input[type="date"], input[type="time"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 24px;
+      background-color: #f5c842;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { background-color: #e0b530; }
+    #reference { margin-top: 20px; color: green; font-weight: bold; }
+    .error { color: red; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+  <h1>CabsOnline - Book a Taxi</h1>
+  <p><a href="admin.html">Go to Admin page</a></p>
+
+  <form id="bookingForm">
+
+    <label>Customer Name *</label>
+    <input type="text" name="cname" id="cname">
+    <span class="error" id="err-cname"></span>
+
+    <label>Phone Number * (10-12 digits)</label>
+    <input type="text" name="phone" id="phone">
+    <span class="error" id="err-phone"></span>
+
+    <label>Unit Number (optional)</label>
+    <input type="text" name="unumber" id="unumber">
+
+    <label>Street Number *</label>
+    <input type="text" name="snumber" id="snumber">
+    <span class="error" id="err-snumber"></span>
+
+    <label>Street Name *</label>
+    <input type="text" name="stname" id="stname">
+    <span class="error" id="err-stname"></span>
+
+    <label>Suburb (optional)</label>
+    <input type="text" name="sbname" id="sbname">
+
+    <label>Destination Suburb (optional)</label>
+    <input type="text" name="dsbname" id="dsbname">
+
+    <label>Pick-up Date *</label>
+    <input type="date" name="date" id="date">
+    <span class="error" id="err-date"></span>
+
+    <label>Pick-up Time *</label>
+    <input type="time" name="time" id="time">
+    <span class="error" id="err-time"></span>
+
+    <button type="button" onclick="submitBooking()">Book Taxi</button>
+
+  </form>
+
+  <!-- Confirmation message appears here after booking -->
+  <div id="reference"></div>
+
+  <script src="booking.js"></script>
+  <script>
+    // Set date and time to current values when page loads
+    window.onload = function() {
+      setDefaultDateTime();
+    };
+  </script>
+
+</body>
+</html>

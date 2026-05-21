@@ -1,0 +1,20 @@
+-- File: mysqlcommand.txt
+-- Author: Aaron Taula - 15905800
+-- Description: MySQL command to create the bookings table for CabsOnline.
+--              Run this in phpMyAdmin under your database (cdt6246).
+
+CREATE TABLE bookings (
+  id          INT AUTO_INCREMENT PRIMARY KEY,
+  booking_ref VARCHAR(8)   NOT NULL UNIQUE,
+  cname       VARCHAR(100) NOT NULL,
+  phone       VARCHAR(12)  NOT NULL,
+  unumber     VARCHAR(10),
+  snumber     VARCHAR(10)  NOT NULL,
+  stname      VARCHAR(100) NOT NULL,
+  sbname      VARCHAR(100),
+  dsbname     VARCHAR(100),
+  pickup_date DATE         NOT NULL,
+  pickup_time TIME         NOT NULL,
+  status      VARCHAR(20)  NOT NULL DEFAULT 'unassigned',
+  created_at  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
